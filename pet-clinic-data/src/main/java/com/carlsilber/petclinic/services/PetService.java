@@ -1,5 +1,7 @@
 package com.carlsilber.petclinic.services;
 
-public interface PetService extends CrudService<PetService, Long> {
+import com.carlsilber.petclinic.model.Pet;
+
+public interface PetService extends CrudService<Pet, Long> {
 
 }
