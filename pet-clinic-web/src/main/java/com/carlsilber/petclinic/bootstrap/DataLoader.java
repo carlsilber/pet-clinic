@@ -82,9 +82,9 @@ public class DataLoader implements CommandLineRunner {
     Owner owner2 = new Owner();
     owner2.setFirstName("Linda");
     owner2.setLastName("Carter");
-    owner1.setAddress("Gaujas Iela 1");
-    owner1.setCity("Riga");
-    owner1.setTelephone("37329830452");
+    owner2.setAddress("Gaujas Iela 1");
+    owner2.setCity("Riga");
+    owner2.setTelephone("37329830452");
 
     Pet lindasCat = new Pet();
     lindasCat.setName("Kitty");

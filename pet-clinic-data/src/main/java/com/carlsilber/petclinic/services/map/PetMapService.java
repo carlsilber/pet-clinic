@@ -3,9 +3,11 @@ package com.carlsilber.petclinic.services.map;
 import com.carlsilber.petclinic.model.Pet;
 import com.carlsilber.petclinic.services.PetService;
 import java.util.Set;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 @Service
+@Profile({"default", "map"})
 public class PetMapService extends AbstractMapService<Pet, Long> implements PetService {
   @Override
   public Set<Pet> findAll() {
