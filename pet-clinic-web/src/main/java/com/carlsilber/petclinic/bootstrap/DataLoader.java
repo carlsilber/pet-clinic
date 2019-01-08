@@ -5,10 +5,12 @@ import com.carlsilber.petclinic.model.Pet;
 import com.carlsilber.petclinic.model.PetType;
 import com.carlsilber.petclinic.model.Specialty;
 import com.carlsilber.petclinic.model.Vet;
+import com.carlsilber.petclinic.model.Visit;
 import com.carlsilber.petclinic.services.OwnerService;
 import com.carlsilber.petclinic.services.PetTypeService;
 import com.carlsilber.petclinic.services.SpecialtyService;
 import com.carlsilber.petclinic.services.VetService;
+import com.carlsilber.petclinic.services.VisitService;
 import java.time.LocalDate;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -20,14 +22,16 @@ public class DataLoader implements CommandLineRunner {
   private final VetService vetService;
   private final PetTypeService petTypeService;
   private final SpecialtyService specialtyService;
+  private final VisitService visitService;
 
   public DataLoader(OwnerService ownerService,
       VetService vetService, PetTypeService petTypeService,
-      SpecialtyService specialtyService) {
+      SpecialtyService specialtyService, VisitService visitService) {
     this.ownerService = ownerService;
     this.vetService = vetService;
     this.petTypeService = petTypeService;
     this.specialtyService = specialtyService;
+    this.visitService = visitService;
   }
 
   @Override
@@ -67,12 +71,12 @@ public class DataLoader implements CommandLineRunner {
     owner1.setCity("Berlin");
     owner1.setTelephone("2345234235");
 
-    Pet mikesPet = new Pet();
-    mikesPet.setName("Laika");
-    mikesPet.setPetType(savedDogPetType);
-    mikesPet.setOwner(owner1);
-    mikesPet.setBirthDate(LocalDate.now());
-    owner1.getPets().add(mikesPet);
+    Pet mikesDog = new Pet();
+    mikesDog.setName("Laika");
+    mikesDog.setPetType(savedDogPetType);
+    mikesDog.setOwner(owner1);
+    mikesDog.setBirthDate(LocalDate.now());
+    owner1.getPets().add(mikesDog);
     ownerService.save(owner1);
 
     Owner owner2 = new Owner();
@@ -82,13 +86,21 @@ public class DataLoader implements CommandLineRunner {
     owner1.setCity("Riga");
     owner1.setTelephone("37329830452");
 
-    Pet lindasPet = new Pet();
-    lindasPet.setName("Kitty");
-    lindasPet.setPetType(savedCatPetType);
-    lindasPet.setOwner(owner2);
-    lindasPet.setBirthDate(LocalDate.now());
-    owner2.getPets().add(lindasPet);
+    Pet lindasCat = new Pet();
+    lindasCat.setName("Kitty");
+    lindasCat.setPetType(savedCatPetType);
+    lindasCat.setOwner(owner2);
+    lindasCat.setBirthDate(LocalDate.now());
+    owner2.getPets().add(lindasCat);
     ownerService.save(owner2);
+
+
+    Visit catVisit = new Visit();
+    catVisit.setPet(lindasCat);
+    catVisit.setDate(LocalDate.now());
+    catVisit.setDescription("Kitty's leg is broken");
+
+    visitService.save(catVisit);
 
     System.out.println("Loaded Owners....");
 
