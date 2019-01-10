@@ -1,6 +1,9 @@
 package com.carlsilber.petclinic.controllers;
 
+import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -73,5 +76,15 @@ class OwnerControllerTest {
         .andExpect(view().name("notimplemented"));
 
     verifyZeroInteractions(ownerService);
+  }
+
+  @Test
+  void displayOwner() throws Exception {
+    when(ownerService.findById(anyLong())).thenReturn(Owner.builder().id(1l).build());
+
+    mockMvc.perform(get("/owners/123"))
+        .andExpect(status().isOk())
+        .andExpect(view().name("owners/ownerDetails"))
+        .andExpect(model().attribute("owner", hasProperty("id", is(1l))));
   }
 }
