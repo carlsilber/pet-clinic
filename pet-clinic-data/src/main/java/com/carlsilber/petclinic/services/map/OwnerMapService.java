@@ -5,6 +5,7 @@ import com.carlsilber.petclinic.model.Pet;
 import com.carlsilber.petclinic.services.OwnerService;
 import com.carlsilber.petclinic.services.PetService;
 import com.carlsilber.petclinic.services.PetTypeService;
+import java.util.List;
 import java.util.Set;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
@@ -78,4 +79,10 @@ public class OwnerMapService extends AbstractMapService<Owner, Long> implements 
         .orElse(null);
   }
 
+  @Override
+  public List<Owner> findAllByLastNameLike(String lastName) {
+
+    // ToDo -impl
+    return null;
+  }
 }
